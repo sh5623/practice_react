@@ -1,1 +1,1 @@
-# practice_react(branch main)
+# Practice React (defualt branch 'main')
