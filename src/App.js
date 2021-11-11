@@ -1,34 +1,24 @@
 import { useState } from "react";
+import TodoList from "./TodoList";
+import Coins from "./Coins";
 
 function App() {
-  const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
-  const onChange = (event) => setTodo(event.target.value);
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (todo === "") {
-      return;
-    }
-    setTodo("");
-    setTodos((currentArray) => [todo, ...todos]);
+  const [select, setSelect] = useState("");
+
+  const changeSelect = (event) => {
+    setSelect(event.target.value);
   };
 
   return (
     <div>
-      <h1>My To Dos ({todos.length})</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          value={todo}
-          onChange={onChange}
-          type="text"
-          placeholder="Write your to do..."
-        />
-        <button>Add To Do</button>
-      </form>
-      <hr />
-      {todos.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
+      <label htmlFor="selectComponents">Choose your component's</label>
+      <select id="selectComponents" onChange={changeSelect}>
+        <option value="">Select components</option>
+        <option value="1">TodoList</option>
+        <option value="2">Coins</option>
+      </select>
+      {select === "1" ? <TodoList /> : null}
+      {select === "2" ? <Coins /> : null}
     </div>
   );
 }
