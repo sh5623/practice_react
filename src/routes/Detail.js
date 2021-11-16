@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 
 function Detail() {
   const { id } = useParams();
@@ -36,7 +36,7 @@ function Detail() {
           <h3>
             Genres :{" "}
             {movie.genres.map((genre) => (
-              <li>{genre}</li>
+              <li key={genre}>{genre}</li>
             ))}
           </h3>
           <h3>Rating : {movie.rating}</h3>

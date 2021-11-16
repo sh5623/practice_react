@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 import Movie from "./Movie";
 
 function Movies() {
