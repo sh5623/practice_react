@@ -1,13 +1,21 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import CoinsPagination from "./CoinsPagination";
+import "./CoinsPagination.css";
 
 function Coins() {
-  const [loading, setLoading] = useState(true);
   const [coins, setCoins] = useState([]);
   const [exchange, setExchange] = useState(1);
   const [coinName, setCoinName] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [coinsPerPage] = useState(20);
+
+  const indexOfLastCoins = currentPage * coinsPerPage;
+  const indexOfFirstCoins = indexOfLastCoins - coinsPerPage;
+  const currentCoins = coins.slice(indexOfFirstCoins, indexOfLastCoins);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -29,6 +37,9 @@ function Coins() {
   const refreshCoins = () => {
     setRefresh(!refresh);
   };
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     axios
@@ -48,7 +59,7 @@ function Coins() {
   }, [refresh]);
 
   return (
-    <div>
+    <div style={{ width: 1000 }}>
       <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
       {loading ? (
         <strong>Loading...</strong>
@@ -78,13 +89,19 @@ function Coins() {
           </button>
 
           <ul>
-            {coins.map((coin) => (
+            {currentCoins.map((coin) => (
               <li key={coin.id}>
                 {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price} => ₩
                 {coin.quotes.USD.price * exchange}
               </li>
             ))}
           </ul>
+          <CoinsPagination
+            coinsPerPage={coinsPerPage}
+            totalCoins={coins.length}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
         </>
       )}
     </div>
