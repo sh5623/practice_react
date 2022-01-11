@@ -6,6 +6,7 @@ import Todos from "../components/Todos";
 import Header from "../components/TodosHeader";
 import Footer from "../components/TodosFooter";
 import Info from "../components/TodosInfo";
+import Studys from "../components/Studys";
 import "todomvc-app-css/index.css";
 
 function Home() {
@@ -37,11 +38,13 @@ function Home() {
         <option value="2">Coins</option>
         <option value="3">Movies</option>
         <option value="4">New Todos</option>
+        <option value="5">Studys</option>
       </select>
       {select === "1" ? <TodoList /> : null}
       {select === "2" ? <Coins /> : null}
       {select === "3" ? <Redirect to="/movie"></Redirect> : null}
       {select === "4" ? <TodoComponents /> : null}
+      {select === "5" ? <Studys /> : null}
     </div>
   );
 }
