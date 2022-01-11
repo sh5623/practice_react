@@ -6,27 +6,18 @@ function CoinsPagination({ coinsPerPage, totalCoins, currentPage, paginate }) {
   const [currentPages, setCurrentPages] = useState(1);
   const [perPage] = useState(10);
   const [indexOfLastPages, setIndexOfLastPages] = useState(0);
-  const [indexOfFirstPages, setIndexOfFirstPages] = useState(0);
+  const [indexOfFirstPages, setIndexOfFirstPages] = useState(1);
   const [pages, setPages] = useState([]);
   const [isFirstPage, setIsFirstPage] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
 
   const chagnePage = (value) => {
     if (value === 1) {
-      if (
-        Math.ceil(totalCoins / coinsPerPage) !==
-        pageNumber.slice(indexOfFirstPages, indexOfLastPages)[
-          pageNumber.slice(indexOfFirstPages, indexOfLastPages).length - 1
-        ]
-      ) {
-        setCurrentPages((current) => current + 1);
-        paginate(indexOfLastPages + 1);
-      }
+      setCurrentPages((current) => current + 1);
+      paginate(indexOfLastPages + 1);
     } else if (value === -1) {
-      if (indexOfFirstPages !== 0) {
-        setCurrentPages((current) => current - 1);
-        paginate(indexOfFirstPages - perPage + 1);
-      }
+      setCurrentPages((current) => current - 1);
+      paginate(indexOfFirstPages - perPage + 1);
     }
   };
 
@@ -36,7 +27,7 @@ function CoinsPagination({ coinsPerPage, totalCoins, currentPage, paginate }) {
     }
 
     setCurrentPages(1);
-  }, []);
+  }, [totalCoins]);
 
   useEffect(() => {
     if (indexOfFirstPages === 0) setIsFirstPage(true);
@@ -53,7 +44,7 @@ function CoinsPagination({ coinsPerPage, totalCoins, currentPage, paginate }) {
     setIndexOfFirstPages(indexOfLastPages - perPage);
 
     setPages(pageNumber.slice(indexOfFirstPages, indexOfLastPages));
-  }, [currentPages, indexOfFirstPages, indexOfLastPages]);
+  }, [totalCoins, currentPages, indexOfFirstPages, indexOfLastPages]);
 
   return (
     <nav>

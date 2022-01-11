@@ -11,11 +11,11 @@ function Coins() {
   const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [coinsPerPage] = useState(20);
+  const [coinsPerPage, setCoinsPerPage] = useState(20);
 
-  const indexOfLastCoins = currentPage * coinsPerPage;
-  const indexOfFirstCoins = indexOfLastCoins - coinsPerPage;
-  const currentCoins = coins.slice(indexOfFirstCoins, indexOfLastCoins);
+  let indexOfLastCoins = currentPage * coinsPerPage;
+  let indexOfFirstCoins = indexOfLastCoins - coinsPerPage;
+  let currentCoins = coins.slice(indexOfFirstCoins, indexOfLastCoins);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -57,6 +57,8 @@ function Coins() {
       })
       .catch((error) => alert(error));
   }, [refresh]);
+
+  useEffect(() => {}, [coins]);
 
   return (
     <div style={{ width: 1000 }}>
