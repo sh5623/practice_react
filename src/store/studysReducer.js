@@ -34,13 +34,16 @@ export const studysSlice = createSlice({
     editInputs: (state, action) => {
       state.inputs = action.payload;
     },
-    editUsers: (state, action) => {
+    addUsers: (state, action) => {
       state.users = state.users.concat(action.payload);
+    },
+    removeUsers: (state, action) => {
+      state.users = state.users.filter((user) => user.id !== action.payload);
     },
   },
 });
 
-export const { editInputs, editUsers } = studysSlice.actions;
+export const { editInputs, addUsers, removeUsers } = studysSlice.actions;
 export default studysSlice.reducer;
 export const selectInputs = (state) => state.studys.inputs;
 export const selectUsers = (state) => state.studys.users;

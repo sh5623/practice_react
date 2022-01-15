@@ -19,6 +19,7 @@ function StudyInput({ nextId }) {
     const { value, name } = e.target;
     setInputs({
       ...inputs,
+      id: nextId.current,
       [name]: value,
     });
   };
