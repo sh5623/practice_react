@@ -14,7 +14,6 @@ export const todosSlice = createSlice({
         state.items.push(action.payload);
       },
       prepare: (text) => {
-        debugger;
         return {
           payload: {
             id: ++uniqueId,

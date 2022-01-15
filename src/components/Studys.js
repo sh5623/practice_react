@@ -9,9 +9,9 @@ function Studys() {
   const userInfo = useSelector(selectInputs);
   const StudyArraysComponent = () => {
     if (userInfo.name !== "") {
-      return <StudyArrays userInfo={userInfo} />;
+      return <StudyArrays userInfo={userInfo} nextId={nextId} />;
     } else {
-      return <StudyArrays />;
+      return <StudyArrays nextId={nextId} />;
     }
   };
 
