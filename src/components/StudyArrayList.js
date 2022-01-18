@@ -1,10 +1,17 @@
 import React from "react";
 
-function StudyArrayList({ user, onRemove }) {
+function StudyArrayList({ user, onRemove, onToggle }) {
   return (
     <div>
-      <b>
-        {user.id}. {user.name} ({user.nickName})
+      <b>{user.id}.</b>
+      <b
+        style={{
+          cursor: "pointer",
+          color: user.active ? "green" : "black",
+        }}
+        onClick={() => onToggle(user.id)}
+      >
+        {user.name} ({user.nickName})
       </b>{" "}
       <span>: {user.email}</span>
       <button
