@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import StudyArrayList from "./StudyArrayList";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,6 +7,11 @@ import {
   removeUsers,
   changeActive,
 } from "../store/studysReducer";
+
+function countActiveUsers(users) {
+  if (users !== undefined) return users.filter((user) => user.active).length;
+  else return 0;
+}
 
 function StudyArrays({ userInfo, nextId }) {
   const dispatch = useDispatch();
@@ -27,6 +32,8 @@ function StudyArrays({ userInfo, nextId }) {
     }
   }, [userInfo]);
 
+  const count = useMemo(() => countActiveUsers(users), [users]);
+
   return (
     <div style={{ marginTop: 10 }}>
       {users.map((user) => (
@@ -37,6 +44,7 @@ function StudyArrays({ userInfo, nextId }) {
           key={user.id}
         />
       ))}
+      <span>활성화 사용자 수 : {count}</span>
     </div>
   );
 }
